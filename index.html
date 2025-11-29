@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drywall Installation and Finish Contract</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for mobile-first aesthetics */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            line-height: 1.6;
+        }
+        .container-main {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .legal-clause {
+            font-size: 0.85rem;
+            color: #4b5563;
+        }
+        /* Signature Canvas Styling */
+        #signatureCanvas {
+            border: 2px solid #3b82f6;
+            border-radius: 0.5rem;
+            touch-action: none; /* Prevents scrolling/zooming on the canvas */
+            background-color: #ffffff;
+        }
+        /* Utility for print/export view */
+        .hidden-print {
+            display: block;
+        }
+        @media print {
+            .hidden-print, .signature-tools {
+                display: none !important;
+            }
+            .page-break {
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body class="p-4">
+
+    <div id="contractForm" class="container-main max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-xl mb-12">
+        
+        <!-- Contract Header -->
+        <header class="text-center mb-8 border-b pb-4">
+            <h1 class="text-3xl font-extrabold text-blue-700">Drywall Installation & Finish Contract</h1>
+            <p class="text-gray-500 mt-1">Contract Agreement for Services Rendered</p>
+        </header>
+
+        <!-- Section 1: Parties and Date -->
+        <section class="mb-8 p-4 bg-blue-50 rounded-lg">
+            <h2 class="text-xl font-bold mb-4 text-blue-700">Agreement Details</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex flex-col">
+                    <label for="contractorName" class="font-semibold mb-1">Contractor Name:</label>
+                    <input type="text" id="contractorName" value="[Your Company Name Here]" class="p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div class="flex flex-col">
+                    <label for="contractorRep" class="font-semibold mb-1">Contractor Representative:</label>
+                    <input type="text" id="contractorRep" value="[Your Name]" class="p-2 border rounded-md">
+                </div>
+                <div class="flex flex-col">
+                    <label for="customerName" class="font-semibold mb-1 text-teal-700">Customer Name:</label>
+                    <input type="text" id="customerName" placeholder="John/Jane Doe" class="p-2 border border-teal-400 rounded-md focus:ring-teal-500 focus:border-teal-500">
+                </div>
+                <div class="flex flex-col">
+                    <label for="jobSiteAddress" class="font-semibold mb-1 text-teal-700">Job Site Address:</label>
+                    <input type="text" id="jobSiteAddress" placeholder="123 Main St, Anytown" class="p-2 border border-teal-400 rounded-md">
+                </div>
+            </div>
+            <div class="mt-4">
+                <label for="agreementDate" class="font-semibold mb-1">Agreement Date:</label>
+                <input type="date" id="agreementDate" class="p-2 border rounded-md">
+            </div>
+        </section>
+
+        <!-- Section 2: Scope of Work -->
+        <section class="mb-8">
+            <h2 class="text-xl font-bold mb-4 text-gray-700 border-b pb-2">Scope of Work and Pricing (The "Estimate")</h2>
+            <p class="mb-2 text-sm text-gray-600">Please paste the detailed project description and total pricing from the Estimation Tool here. **This defines the total project charge.**</p>
+            <textarea id="scopeOfWork" rows="15" placeholder="Pasted estimate summary here... Must include total area, finish level, and final cost." class="w-full p-3 border border-gray-300 rounded-md focus:ring-amber-500 focus:border-amber-500 bg-amber-50"></textarea>
+            <p class="mt-2 text-lg font-bold text-gray-800">TOTAL CONTRACT PRICE: <span id="contractPriceDisplay" class="text-red-600">$ [To be entered in Scope of Work]</span></p>
+        </section>
+        
+        <!-- Section 3: Legal Terms -->
+        <section class="mb-8">
+            <h2 class="text-xl font-bold mb-4 text-gray-700 border-b pb-2">Standard Contract Terms and Conditions</h2>
+            <div class="space-y-4 legal-clause">
+                <p><strong>1. Services Defined:</strong> The Contractor agrees to furnish all labor, materials, equipment, and supervision necessary to complete the drywall installation and finishing as detailed in the "Scope of Work" above (the "Work").</p>
+                <p><strong>2. Total Price & Payment:</strong> The Customer agrees to pay the Contractor the Total Contract Price specified in the Scope of Work. Payment shall be due as follows: (a) 50% deposit upon signing this Agreement; (b) 40% upon completion of the hanging and fastening phase; and (c) the final 10% upon completion and acceptance of the finishing work (mud, tape, final sanding).</p>
+                <p><strong>3. Work Completion & Schedule:</strong> The Contractor shall commence work on or about [Contractor to Specify] and shall work diligently to complete the Work. Time is not of the essence in this Agreement. Any delays caused by the Customer (e.g., changes, site inaccessibility, other trades) shall extend the completion date accordingly.</p>
+                <p><strong>4. Change Orders:</strong> Any modifications to the Scope of Work, including changes in ceiling height, finish level, or additional areas, must be agreed upon in writing by both parties via a formal Change Order. The Change Order must detail the scope, price, and schedule impact before work on the change commences.</p>
+                <p><strong>5. Exclusions & Site Conditions:</strong> This Contract price is based on the assumption that the job site is ready (framing complete, utilities available, clear access, minimum required temperature maintained). The price **EXCLUDES** painting, priming, texturing, fireproofing, or any repair to faulty underlying structural work (e.g., non-plumb walls, uneven floors). Contractor is not responsible for damages caused by other trades, lack of proper ventilation, or severe humidity/temperature fluctuations after the Work is completed.</p>
+                <p><strong>6. Warranty:</strong> The Contractor warrants that the Work shall be free from material defects in workmanship for a period of one (1) year from the date of final payment. This warranty is voided by water damage, structural settlement, or modification by other parties.</p>
+                <p><strong>7. Dispute Resolution & Governing Law:</strong> This Contract shall be governed by the laws of the State where the Work is performed. Any disputes arising under this Contract shall first be attempted to be resolved through mediation before litigation is pursued.</p>
+            </div>
+        </section>
+
+        <!-- Section 4: Signature Area -->
+        <section class="mb-8 pt-4 border-t border-gray-300">
+            <h2 class="text-xl font-bold mb-4 text-gray-700">Acceptance and Signatures</h2>
+            <p class="mb-4 text-sm text-red-600 font-semibold">By signing below, both parties agree to all terms, conditions, and the Total Contract Price detailed above.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Contractor Signature -->
+                <div class="space-y-4">
+                    <div class="flex flex-col">
+                        <label class="font-bold mb-2">Contractor Signature (Electronically Stored)</label>
+                        <div class="h-32 bg-gray-100 border border-gray-400 rounded-md flex items-center justify-center text-sm text-gray-500">
+                            Signature on file or waived by mutual consent.
+                        </div>
+                        <p class="border-t mt-1 pt-1 text-sm font-semibold">Contractor Representative: <span id="contractorRepSigned">[Your Name]</span></p>
+                        <p class="text-xs text-gray-500">Date: <span id="contractorDateSigned"></span></p>
+                    </div>
+                </div>
+
+                <!-- Customer Signature -->
+                <div class="space-y-4">
+                    <label for="signatureCanvas" class="font-bold mb-2 text-teal-700">Customer Signature (Draw Below)</label>
+                    <canvas id="signatureCanvas" width="400" height="150" class="w-full"></canvas>
+                    <p class="border-t mt-1 pt-1 text-sm font-semibold text-teal-700">Customer Name: <span id="customerNameSigned"></span></p>
+                    <p class="text-xs text-gray-500">Date: <span id="customerDateSigned"></span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Action Buttons (Hidden in Print View) -->
+        <section class="hidden-print signature-tools pt-8 border-t border-gray-300">
+            <div class="flex flex-wrap gap-4 items-center justify-center">
+                <button onclick="clearSignature()" class="bg-red-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-red-600 transition duration-150">
+                    Clear Signature
+                </button>
+                <button onclick="prepareForPrinting()" class="bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-150">
+                    Finalize & Print/Save as PDF
+                </button>
+                <button onclick="exportSignatureAsImage()" class="bg-yellow-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-yellow-700 transition duration-150">
+                    Export Signature Image
+                </button>
+            </div>
+            <p id="exportMessage" class="mt-4 text-center text-sm text-gray-600 hidden">Signature Data URL copied to clipboard.</p>
+        </section>
+
+    </div>
+
+    <script>
+        const canvas = document.getElementById('signatureCanvas');
+        const ctx = canvas.getContext('2d');
+        let drawing = false;
+        let isTouchDevice = 'ontouchstart' in window;
+
+        // Set up the canvas drawing environment
+        function initializeCanvas() {
+            // Adjust canvas resolution for high-DPI screens if needed, but for signature, simple scaling often suffices.
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = '#000000';
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height); // Ensure white background
+        }
+
+        /**
+         * Converts event coordinates to canvas coordinates, handling scaling and touch events.
+         * @param {Event} e - Mouse or Touch event.
+         * @returns {{x: number, y: number}} The coordinates relative to the canvas.
+         */
+        function getCanvasCoordinates(e) {
+            const rect = canvas.getBoundingClientRect();
+            let clientX, clientY;
+
+            if (isTouchDevice && e.touches && e.touches.length > 0) {
+                // Use the first touch point for simplicity
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+
+            // Calculate position relative to canvas and apply scaling
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+
+            return {
+                x: (clientX - rect.left) * scaleX,
+                y: (clientY - rect.top) * scaleY
+            };
+        }
+
+        // --- Event Handlers ---
+
+        function startDrawing(e) {
+            e.preventDefault(); 
+            drawing = true;
+            const { x, y } = getCanvasCoordinates(e);
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+        }
+
+        function draw(e) {
+            if (!drawing) return;
+            e.preventDefault(); 
+            const { x, y } = getCanvasCoordinates(e);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+        }
+
+        function stopDrawing() {
+            if (drawing) {
+                drawing = false;
+                ctx.closePath();
+                updateSignedDates();
+            }
+        }
+
+        // --- Signature and Utility Functions ---
+
+        /**
+         * Clears the signature canvas and resets the date display.
+         */
+        function clearSignature() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            initializeCanvas(); // Re-apply white background and settings
+            document.getElementById('customerDateSigned').textContent = '';
+        }
+
+        /**
+         * Updates the signature fields with current date and customer name.
+         */
+        function updateSignedDates() {
+            const today = new Date().toLocaleDateString();
+            const customerName = document.getElementById('customerName').value || 'Customer';
+
+            document.getElementById('contractorDateSigned').textContent = today;
+            document.getElementById('customerDateSigned').textContent = today;
+            document.getElementById('customerNameSigned').textContent = customerName;
+        }
+
+        /**
+         * Exports the signature canvas as a Data URL and copies it to the clipboard.
+         */
+        function exportSignatureAsImage() {
+            const dataURL = canvas.toDataURL('image/png');
+            
+            // Temporary element for copying to clipboard
+            const tempInput = document.createElement('textarea');
+            tempInput.value = dataURL;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            const msg = document.getElementById('exportMessage');
+            msg.textContent = 'Signature Image Data (Base64) copied to clipboard.';
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 3000);
+        }
+        
+        /**
+         * Gathers data and prepares the page for printing/PDF creation.
+         */
+        function prepareForPrinting() {
+            updateSignedDates();
+            
+            // Update static display fields before printing
+            document.getElementById('contractorRepSigned').textContent = document.getElementById('contractorRep').value;
+            document.getElementById('customerNameSigned').textContent = document.getElementById('customerName').value;
+            
+            // Extract contract price for display (simple regex extraction, adjust as needed)
+            const scopeText = document.getElementById('scopeOfWork').value;
+            const priceMatch = scopeText.match(/\$([\d,]+\.\d{2})/);
+            if (priceMatch && priceMatch[1]) {
+                 document.getElementById('contractPriceDisplay').textContent = `$${priceMatch[1]}`;
+            } else {
+                 document.getElementById('contractPriceDisplay').textContent = "--- PRICE NOT FOUND IN SCOPE ---";
+            }
+            
+            // 1. Convert Canvas to Image Data URL (Crucial for printing/PDF conversion)
+            const signatureDataURL = canvas.toDataURL('image/png');
+            
+            // 2. Replace the interactive canvas with a static image
+            const sigDiv = canvas.parentElement;
+            let img = document.getElementById('customerSignatureImage');
+            if (!img) {
+                img = document.createElement('img');
+                img.id = 'customerSignatureImage';
+                img.style.border = 'none';
+                img.style.display = 'block';
+                img.style.width = '100%';
+                img.style.height = '150px';
+                img.style.objectFit = 'contain';
+                sigDiv.insertBefore(img, canvas);
+            }
+            img.src = signatureDataURL;
+            canvas.style.display = 'none';
+
+            // 3. Trigger native print dialog
+            window.print();
+            
+            // 4. (Optional) Restore view after print dialog closes (though usually unnecessary)
+            // canvas.style.display = 'block';
+            // img.style.display = 'none';
+        }
+
+        // --- Initialization and Event Binding ---
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeCanvas();
+            document.getElementById('agreementDate').valueAsDate = new Date();
+
+            // Set up drawing event listeners for mouse and touch
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseleave', stopDrawing);
+            canvas.addEventListener('mousemove', draw);
+
+            canvas.addEventListener('touchstart', startDrawing);
+            canvas.addEventListener('touchend', stopDrawing);
+            canvas.addEventListener('touchcancel', stopDrawing);
+            canvas.addEventListener('touchmove', draw);
+            
+            // Update name fields when customer name is typed
+            document.getElementById('customerName').addEventListener('input', () => {
+                 document.getElementById('customerNameSigned').textContent = document.getElementById('customerName').value;
+            });
+            
+            // Initial setup of names
+            document.getElementById('customerNameSigned').textContent = document.getElementById('customerName').placeholder;
+            document.getElementById('contractorRepSigned').textContent = document.getElementById('contractorRep').value;
+            updateSignedDates();
+        });
+        
+    </script>
+</body>
+</html>
+
